@@ -91,9 +91,9 @@ spec:
           requests:
             memory: "100Mi"
             cpu: 0.1
-        volumeMounts:
-        - name: mongo-data
-          mountPath: /data/db
+        # volumeMounts:
+        # - name: mongo-data
+        #   mountPath: /data/db
       - name: db-sidecar
         image: cvallance/mongo-k8s-sidecar
         env:
@@ -103,15 +103,15 @@ spec:
           value: go-demo-3-build
         - name: KUBERNETES_MONGO_SERVICE_NAME
           value: db
-  volumeClaimTemplates:
-  - metadata:
-      name: mongo-data
-    spec:
-      accessModes:
-      - ReadWriteOnce
-      resources:
-        requests:
-          storage: 2Gi
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: mongo-data
+  #   spec:
+  #     accessModes:
+  #     - ReadWriteOnce
+  #     resources:
+  #       requests:
+  #         storage: 2Gi
 
 ---
 
@@ -146,7 +146,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: vfarcic/go-demo-3:latest
+        image: tonygilkerson/go-demo-3:latest
         env:
         - name: DB
           value: db
